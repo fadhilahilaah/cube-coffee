@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --primary: #b6895b;
-  --bg: #010101;
+  --primary: #1A4D2E;
+  --bg: #e8dfca;
+  --font-primary: #222831;
+  --font-secondary: #ADBC9F;
 }
 
 * {
@@ -21,7 +23,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--bg);
-  color: #fff;
+  color: var(--font-primary);
 }
 
 /* navbar */
@@ -30,9 +32,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 7%;
-  background-color: rgba(1, 1, 1, 0.8);
+  background-color: rgba(1, 1, 1, 0.2);
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid #513c28;
+  border-bottom: 1px solid #11311e98;
   position: fixed;
   top: 0;
   left: 0;
@@ -98,9 +100,12 @@ body {
   background-size: cover;
   background-position: center;
   position: relative;
+  /* masking */
+  -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0));
 }
 
-.hero::after {
+/* .hero::after {
   content: "";
   display: block;
   position: absolute;
@@ -112,11 +117,15 @@ body {
     rgba(1, 1, 3, 1) 8%,
     rgba(255, 255, 255, 0) 50%
   );
-}
+} */
 
 .hero .content {
   padding: 1.4rem 7%;
-  max-width: 60rem;
+  /* max-width: 60rem; */
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 140px;
 }
 
 .hero .content h1 {
@@ -135,11 +144,12 @@ body {
   margin-top: 1rem;
   line-height: 1.4;
   font-weight: 200;
+  color: #fff;
   text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
   mix-blend-mode: difference;
 }
 
-.hero .content .cta {
+/* .hero .content .cta {
   margin-top: 1rem;
   display: inline-block;
   padding: 1rem 3rem;
@@ -149,7 +159,7 @@ body {
   border-radius: 0.5rem;
   box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
   cursor: pointer;
-}
+} */
 
 /* About Section */
 .about,
@@ -278,7 +288,7 @@ body {
   padding: 2rem;
   font-size: 1.7rem;
   background: none;
-  color: #fff;
+  color: var(--font-primary);
 }
 
 .contact .row form .btn {
@@ -286,7 +296,7 @@ body {
   display: inline-block;
   padding: 1rem 3rem;
   font-size: 1.7rem;
-  color: #fff;
+  color: #e8dfca;
   background-color: var(--primary);
   cursor: pointer;
   border-radius: 1rem;
@@ -306,7 +316,7 @@ footer .socials {
 }
 
 footer .socials a {
-  color: #fff;
+  color: #e8dfca;
   margin: 1rem;
 }
 
@@ -320,12 +330,13 @@ footer .links {
 }
 
 footer .links a {
-  color: #fff;
+  color: #e8dfca;
   padding: 0.7rem 0.8rem;
 }
 
 footer .credit {
   font-size: 0.8rem;
+  color: #f5efe6;
 }
 
 footer .credit a {
@@ -356,7 +367,7 @@ footer .credit a {
     position: absolute;
     top: 100%;
     right: -100%;
-    background-color: #fff;
+    background-color: #868686;
     width: 30rem;
     height: 100vh;
     transition: 0.3s;
@@ -380,6 +391,10 @@ footer .credit a {
 
   .navbar .navbar-nav a:hover::after {
     transform: scaleX(0.2);
+  }
+
+  .hero .content {
+    top: 120px;
   }
 
   .about .row {
@@ -419,5 +434,10 @@ footer .credit a {
 @media (max-width: 450px) {
   html {
     font-size: 55%;
+  }
+
+  .hero .content {
+    text-align: left;
+    top: 100px;
   }
 }
