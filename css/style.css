@@ -31,6 +31,7 @@ body {
   align-items: center;
   padding: 1.4rem 7%;
   background-color: rgba(1, 1, 1, 0.8);
+  backdrop-filter: blur(4px);
   border-bottom: 1px solid #513c28;
   position: fixed;
   top: 0;
@@ -183,6 +184,7 @@ body {
 
 .about .row .about-img img {
   width: 100%;
+  border-radius: 1rem;
 }
 
 .about .row .content {
