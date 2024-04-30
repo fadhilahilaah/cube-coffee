@@ -130,7 +130,7 @@ body {
 
 .navbar .search-form label {
   cursor: pointer;
-  height: 40px;
+  height: 45px;
   font-size: 2rem;
   margin-right: 1.5rem;
   color: var(--font-primary);
@@ -531,6 +531,10 @@ footer .credit a {
   html {
     font-size: 75%;
   }
+  
+  .navbar .search-form label {
+    height: 27px;
+  }
 }
 
 /* Tablet */
@@ -576,6 +580,10 @@ footer .credit a {
   .navbar .search-form {
     width: 90%;
     right: 2rem;
+  }
+
+  .navbar .search-form label {
+    height: 27px;
   }
 
   .hero .content {
