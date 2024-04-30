@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --primary: #1A4D2E;
+  --primary: #1a4d2e;
   --bg: #e8dfca;
+  --bg-secondary: #ffffff;
   --font-primary: #222831;
-  --font-secondary: #ADBC9F;
+  --font-secondary: #adbc9f;
+  --star-full: #ffd23f;
+  --remove: #e72929;
 }
 
 * {
@@ -90,6 +93,95 @@ body {
   display: none;
 }
 
+/* navbar search form */
+.navbar .search-form {
+  position: absolute;
+  top: 103%;
+  right: 7%;
+  background-color: var(--bg);
+  width: 50rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  overflow: hidden;
+  box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.1);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.2s ease-in-out;
+}
+
+.navbar .search-form.active {
+  transform: scaleY(1);
+}
+
+.navbar .search-form:hover {
+  box-shadow: 0px 1px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .search-form input {
+  height: 100%;
+  width: 100%;
+  font-size: 1.4rem;
+  color: var(--font-primary);
+  padding: 1rem 2rem;
+  background: none;
+}
+
+.navbar .search-form label {
+  cursor: pointer;
+  height: 27px;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+  color: var(--font-primary);
+}
+
+/* Shopping Cart */
+.shopping-cart {
+  position: absolute;
+  top: 100%;
+  right: -100%;
+  height: 100vh;
+  width: 38rem;
+  padding: 0 1.5rem;
+  color: var(--bg);
+  background-color: #868686;
+}
+
+.shopping-cart .cart-item {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--primary);
+  position: relative;
+}
+
+.shopping-cart img {
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.shopping-cart h3 {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.shopping-cart .item-price {
+  font-size: 1.2rem;
+}
+
+.shopping-cart .remove-item {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.shopping-cart .remove-item:hover {
+  color: var(--remove);
+}
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
@@ -164,13 +256,15 @@ body {
 /* About Section */
 .about,
 .menu,
-.contact {
+.contact,
+.products {
   padding: 8rem 7% 1.4rem;
 }
 
 .about h2,
 .menu h2,
-.contact h2 {
+.contact h2,
+.products h2 {
   text-align: center;
   font-size: 2.6rem;
   margin-bottom: 3rem;
@@ -178,7 +272,8 @@ body {
 
 .about h2 span,
 .menu h2 span,
-.contact h2 span {
+.contact h2 span,
+.products h2 span {
   color: var(--primary);
 }
 
@@ -249,6 +344,77 @@ body {
 
 .menu .row .menu-card .menu-card-title {
   margin: 1rem auto 0.5rem;
+}
+
+/* Product Section */
+.products .row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.products .product-card {
+  text-align: center;
+  border: 1px solid var(--font-primary);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
+.products .product-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.products .product-icons a {
+  width: 4rem;
+  height: 4rem;
+  color: var(--font-primary);
+  margin: 0.3rem;
+  /* border: 1px solid var(--font-primary); */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products .product-icons a:hover {
+  background-color: var(--primary);
+  color: var(--bg-secondary);
+}
+
+.products .product-image {
+  padding: 1rem 0;
+}
+
+.products .product-image img {
+  height: 25rem;
+  border-radius: 1rem;
+}
+
+.products .product-content h3 {
+  font-size: 1.6rem;
+}
+
+.products .product-stars {
+  font-size: 1.3rem;
+  padding: 0.8rem;
+}
+
+.products .product-stars .star-full {
+  fill: var(--star-full);
+}
+
+.products .product-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.products .product-price span {
+  text-decoration: line-through;
+  font-weight: lighter;
+  font-size: 1rem;
 }
 
 /* contact section */
@@ -391,6 +557,11 @@ footer .credit a {
 
   .navbar .navbar-nav a:hover::after {
     transform: scaleX(0.2);
+  }
+
+  .navbar .search-form {
+    width: 90%;
+    right: 2rem;
   }
 
   .hero .content {
