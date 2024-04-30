@@ -13,7 +13,7 @@ const searchBox = document.querySelector("#search-box");
 document.querySelector("#search-button").onclick = () => {
   searchForm.classList.toggle("active");
   searchBox.focus();
-  e.preventDefault;
+  e.preventDefault();
 };
 
 // Klik diluar elemen
