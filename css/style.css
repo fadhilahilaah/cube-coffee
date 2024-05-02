@@ -146,6 +146,11 @@ body {
   padding: 0 1.5rem;
   color: var(--bg);
   background-color: #868686;
+  transition: 0.3s ease-in-out;
+}
+
+.shopping-cart.active {
+  right: 0;
 }
 
 .shopping-cart .cart-item {
@@ -531,7 +536,7 @@ footer .credit a {
   html {
     font-size: 75%;
   }
-  
+
   .navbar .search-form label {
     height: 27px;
   }
