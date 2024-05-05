@@ -42,3 +42,33 @@ document.addEventListener("click", function (e) {
     shoppingCart.classList.remove("active");
   }
 });
+
+// Modal Box
+const itemDetailModal = document.querySelector("#item-detail-modal");
+const itemDetailButton = document.querySelector("#item-detail-button");
+
+itemDetailButton.onclick = (e) => {
+  itemDetailModal.style.display = "flex";
+  e.preventDefault();
+};
+
+// all eye button works
+// itemDetailButton.forEach((btn) => {
+//   btn.onclick = (e) => {
+//     btn.style.display = "flex";
+//     e.preventDefault();
+//   };
+// });
+
+// close button
+document.querySelector(".modal .close-icon").onclick = (e) => {
+  itemDetailModal.style.display = "none";
+  e.preventDefault();
+};
+
+// klik diluar modal
+window.onclick = (e) => {
+  if (e.target === itemDetailModal) {
+    itemDetailModal.style.display = "none";
+  }
+};
