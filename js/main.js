@@ -55,7 +55,7 @@ itemDetailButton.onclick = (e) => {
 // all eye button works
 // itemDetailButton.forEach((btn) => {
 //   btn.onclick = (e) => {
-//     btn.style.display = "flex";
+//     itemDetailModal.style.display = "flex";
 //     e.preventDefault();
 //   };
 // });
