@@ -2,8 +2,9 @@
 const navbarNav = document.querySelector(".navbar-nav");
 
 // Hamburger menu onclick
-document.querySelector("#hamburger-menu").onclick = () => {
+document.querySelector("#hamburger-menu").onclick = (e) => {
   navbarNav.classList.toggle("active");
+  e.preventDefault();
 };
 
 // toggle class active search-bar
