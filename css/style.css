@@ -416,16 +416,24 @@ body {
   padding: 0.8rem;
 }
 
-.products .product-stars .star-full {
+.products .product-stars .star-full,
+.modal
+  .modal-container
+  .modal-content
+  .product-content
+  .product-stars
+  .star-full {
   fill: var(--star-full);
 }
 
-.products .product-price {
+.products .product-price,
+.modal .modal-container .modal-content .product-content .product-price {
   font-size: 1.3rem;
   font-weight: bold;
 }
 
-.products .product-price span {
+.products .product-price span,
+.modal .modal-container .modal-content .product-content .product-price span {
   text-decoration: line-through;
   font-weight: lighter;
   font-size: 1rem;
@@ -581,6 +589,7 @@ footer .credit a {
   height: 20rem;
   margin-right: 2rem;
   margin-bottom: 2rem;
+  border-radius: 0.5rem;
 }
 
 .modal-content p {
@@ -598,6 +607,12 @@ footer .credit a {
   color: var(--bg);
   margin-top: 1rem;
   padding: 1rem 1.6rem;
+  border-radius: 1rem;
+}
+
+.modal-content a:hover {
+  background-color: var(--font-secondary);
+  color: var(--primary);
 }
 
 /* Media Queries */
