@@ -4,16 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cube Coffee</title>
-
     <!-- main style css -->
     <link rel="stylesheet" href="css/style.css" />
 
     <!-- feather icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Alpine JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- App -->
+    <script src="src/app.js"></script>
   </head>
   <body>
     <!-- Navbar start -->
-    <nav class="navbar">
+    <nav class="navbar" x-data>
       <a href="#" class="navbar-logo"><span>cube</span>coffee.</a>
 
       <div class="navbar-nav">
@@ -26,9 +34,14 @@
 
       <div class="navbar-extra">
         <a href="#" id="search-button"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart-button"
-          ><i data-feather="shopping-cart"></i
-        ></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-badge"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
+          ></span>
+        </a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
       </div>
 
@@ -41,41 +54,31 @@
 
       <!-- Shopping Cart start -->
       <div class="shopping-cart">
-        <div class="cart-item">
-          <img
-            src="image/products/aceh-gayo-coffee-beans.jpg"
-            alt="Aceh Gayo Coffee Beans"
-          />
-          <div class="item-detail">
-            <h3>Aceh Gayo Coffee Beans</h3>
-            <div class="item-price">IDR 75K</div>
+        <template x-for="(item, index) in $store.cart.items" x-keys="index">
+          <div class="cart-item">
+            <img :src="`${item.img}`" :alt="`${item.name}`" />
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <span x-text="rupiah(item.price)"></span> &times;
+                <button id="remove" @click="$store.cart.remove(item.id)">
+                  &minus;
+                </button>
+                <span x-text="item.quantity"></span>
+                <button id="add" @click="$store.cart.add(item)">&plus;</button>
+                &equals;
+                <span x-text="rupiah(item.total)"></span>
+              </div>
+            </div>
           </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+        </template>
 
-        <div class="cart-item">
-          <img
-            src="image/products/sumatra-dolok-sanggul-coffee-beans.jpg"
-            alt="Sumatra Dolok Coffee Beans"
-          />
-          <div class="item-detail">
-            <h3>Sumatra Dolok Coffee Beans</h3>
-            <div class="item-price">IDR 75K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-
-        <div class="cart-item">
-          <img
-            src="image/products/flores-colol-coffee-beans.jpg"
-            alt="Flores Colol Coffee Beans"
-          />
-          <div class="item-detail">
-            <h3>Flores Colol Coffee Beans</h3>
-            <div class="item-price">IDR 75K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+        <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem">
+          Cart is Empty
+        </h4>
+        <h4 x-show="$store.cart.items.length">
+          Total : <span x-text="rupiah($store.cart.total)"></span>
+        </h4>
       </div>
       <!-- Shopping Cart end -->
     </nav>
@@ -187,7 +190,7 @@
       <!-- menu on-site end -->
 
       <!-- product section start -->
-      <section class="products" id="products">
+      <section class="products" id="products" x-data="products">
         <h2><span>Produk Unggulan</span> Kami</h2>
         <p>
           Temukan koleksi produk berkualitas kami yang dirancang untuk
@@ -195,305 +198,104 @@
         </p>
 
         <div class="row">
-          <!-- card 1 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/aceh-gayo-coffee-beans.jpg"
-                alt="Aceh Gayo Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Aceh Gayo Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
+          <template x-for="(item, index) in items" x-key="index">
+            <div class="product-card">
+              <div class="product-image">
+                <img :src="`${item.img}`" :alt="item.name" />
               </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#" id="item-detail-button"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 2 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/bali-kintamani-coffee-beans.jpg"
-                alt="Bali Kintamani Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Bali Kintamani Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
+              <div class="product-content">
+                <h3 x-text="item.name" class="menu-card-title"></h3>
+                <div class="product-stars">
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="#ffd23f"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#star" />
+                  </svg>
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="#ffd23f"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#star" />
+                  </svg>
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="#ffd23f"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#star" />
+                  </svg>
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="#ffd23f"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#star" />
+                  </svg>
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="#ffd23f"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#star" />
+                  </svg>
+                </div>
+                <div class="product-price">
+                  <span x-text="rupiah(item.price)"></span>
+                </div>
               </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 3 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/bali-ulian-coffee-beans.jpg"
-                alt="Bali Ulian Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Bali Ulian Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star"></i>
+              <div class="product-icons">
+                <a href="#" @click.prevent="$store.cart.add(item)">
+                  <svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#shopping-cart" />
+                  </svg>
+                </a>
+                <a href="#" id="item-detail-button"
+                  ><svg
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <use href="image/feather-sprite.svg#eye" />
+                  </svg>
+                </a>
               </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
             </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 4 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/flores-colol-coffee-beans.jpg"
-                alt="Flores Colol Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Flores Colol Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-              </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 5 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/sumatra-dolok-sanggul-coffee-beans.jpg"
-                alt="Sumatra Dolok Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Sumatra Dolok Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-              </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 6 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/toraja-mialo-coffee-beans.jpg"
-                alt="Toraja Mialo Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Toraja Mialo Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-              </div>
-              <div class="product-price">IDR 75K <span>IDR 100K</span></div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 7 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/black-pearl-coffee-beans.jpg"
-                alt="Black Pearl Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Black Pearl Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star"></i>
-              </div>
-              <div class="product-price">IDR 360K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 8 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/luwak-coffee-beans.jpg"
-                alt="Luwak Coffee Beans"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Luwak Coffee Beans</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-              </div>
-              <div class="product-price">IDR 350K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 9 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/coffee-pot-900-ml-black.jpg"
-                alt="Coffee Pot 900ml Black"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Coffee Pot 900ml Black</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-              </div>
-              <div class="product-price">IDR 517K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 10 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/coffee-pot-1000-ml.jpg"
-                alt="Coffee Pot 1000ml"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">Coffee Pot 1000ml</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star"></i>
-                <i data-feather="star"></i>
-              </div>
-              <div class="product-price">IDR 423K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 11 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/t-shirt-cki-black.jpg"
-                alt="T-Shirt CKI Black"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">T-Shirt CKI Black</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star"></i>
-              </div>
-              <div class="product-price">IDR 160K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
-
-          <!-- card 12 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="image/products/t-shirt-cki-white.jpg"
-                alt="T-Shirt CKI White"
-              />
-            </div>
-            <div class="product-content">
-              <h3 class="menu-card-title">T-Shirt CKI White</h3>
-              <div class="product-stars">
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star" class="star-full"></i>
-                <i data-feather="star"></i>
-              </div>
-              <div class="product-price">IDR 160K</div>
-            </div>
-            <div class="product-icons">
-              <a href="#"><i data-feather="shopping-cart"></i></a>
-              <a href="#"><i data-feather="eye"></i></a>
-            </div>
-          </div>
+          </template>
         </div>
       </section>
       <!-- product section end -->
