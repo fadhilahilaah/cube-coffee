@@ -63,15 +63,15 @@ body {
   margin: 0 1rem;
 }
 
-.navbar .navbar-nav a:hover {
-  color: var(--primary);
-}
+/* .navbar .navbar-nav a:hover {
+  color: var(--bg);
+} */
 
 .navbar .navbar-nav a::after {
   content: "";
   display: block;
   padding-bottom: 0.5rem;
-  border-bottom: 0.1rem solid var(--primary);
+  border-bottom: 0.1rem solid #ffffff;
   transform: scaleX(0);
   transition: 0.2s linear;
 }
@@ -85,9 +85,9 @@ body {
   margin: 0 0.5rem;
 }
 
-.navbar .navbar-extra a:hover {
-  color: var(--primary);
-}
+/* .navbar .navbar-extra a:hover {
+  color: var(--bg);
+} */
 
 #hamburger-menu {
   display: none;
