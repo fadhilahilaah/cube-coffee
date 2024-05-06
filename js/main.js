@@ -10,7 +10,7 @@ document.querySelector("#hamburger-menu").onclick = () => {
 const searchForm = document.querySelector(".search-form");
 const searchBox = document.querySelector("#search-box");
 
-document.querySelector("#search-button").onclick = () => {
+document.querySelector("#search-button").onclick = (e) => {
   searchForm.classList.toggle("active");
   searchBox.focus();
   e.preventDefault();
@@ -19,7 +19,7 @@ document.querySelector("#search-button").onclick = () => {
 // toggle class active shopping-cart
 const shoppingCart = document.querySelector(".shopping-cart");
 
-document.querySelector("#shopping-cart-button").onclick = () => {
+document.querySelector("#shopping-cart-button").onclick = (e) => {
   shoppingCart.classList.toggle("active");
   e.preventDefault();
 };
