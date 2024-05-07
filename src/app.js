@@ -87,6 +87,41 @@ document.addEventListener("alpine:init", () => {
     ],
   }));
 
+  Alpine.data('menu', () => ({
+    items: [
+      {
+        name: '- Espresso Elixir -',
+        img: 'image/menu/espresso-delight.jpg',
+        price: 'IDR 28K'
+      },
+      {
+        name: '- American Voyage -',
+        img: 'image/menu/americano.jpg',
+        price: 'IDR 32K'
+      },
+      {
+        name: '- Lavish Latte -',
+        img: 'image/menu/latte.jpg',
+        price: 'IDR 42K'
+      },
+      {
+        name: '- Matcha Marvel -',
+        img: 'image/menu/matcha-latte.jpg',
+        price: 'IDR 48K'
+      },
+      {
+        name: '- Mocha Madness -',
+        img: 'image/menu/mocha-madness.jpg',
+        price: 'IDR 50K'
+      },
+      {
+        name: '- Caramel Dream -',
+        img: 'image/menu/caramel-machiato.jpg',
+        price: 'IDR 55K'
+      },
+    ]
+  }))
+
   Alpine.store("cart", {
     items: [],
     total: 0,

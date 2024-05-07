@@ -169,66 +169,18 @@
       </p>
 
       <!-- menu on-site start -->
-      <div class="row">
-        <div class="menu-card">
-          <img
-            src="image/menu/espresso-delight.jpg"
-            alt="Espresso Elixir"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Espresso Elixir -</h3>
-          <p class="menu-card-price">IDR 28K</p>
-        </div>
-
-        <div class="menu-card">
-          <img
-            src="image/menu/americano.jpg"
-            alt="American Voyage"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- American Voyage -</h3>
-          <p class="menu-card-price">IDR 32K</p>
-        </div>
-
-        <div class="menu-card">
-          <img
-            src="image/menu/latte.jpg"
-            alt="Lavish Latte"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Lavish Latte -</h3>
-          <p class="menu-card-price">IDR 42K</p>
-        </div>
-
-        <div class="menu-card">
-          <img
-            src="image/menu/matcha-latte.jpg"
-            alt="Matcha Marvel"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Matcha Marvel -</h3>
-          <p class="menu-card-price">IDR 48K</p>
-        </div>
-
-        <div class="menu-card">
-          <img
-            src="image/menu/mocha-madness.jpg"
-            alt="Mocha Madness"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Mocha Madness -</h3>
-          <p class="menu-card-price">IDR 50K</p>
-        </div>
-
-        <div class="menu-card">
-          <img
-            src="image/menu/caramel-machiato.jpg"
-            alt="Caramel Dream"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Caramel Dream -</h3>
-          <p class="menu-card-price">IDR 55K</p>
-        </div>
+      <div class="row" x-data="menu">
+        <template x-for="(item, index) in items" x-key="index">
+          <div class="menu-card">
+            <img
+              :src="`${item.img}`"
+              :alt="${item.name}`"
+              class="menu-card-img"
+            />
+            <h3 x-text="item.name" class="menu-card-title"></h3>
+            <p x-text="item.price" class="menu-card-price"></p>
+          </div>
+        </template>
       </div>
       <!-- menu on-site end -->
 
